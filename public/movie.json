@@ -1,0 +1,146 @@
+[
+  {
+    "Poster": "https://i.ibb.co.com/wr63MMZx/images.jpg",
+    "Title": "Inception",
+    "Genre": ["Action", "Sci-Fi", "Thriller"],
+    "Duration": 148,
+    "ReleaseYear": 2010,
+    "Rating": 8.8,
+    "Summary": "A skilled thief enters people's dreams to steal secrets, but his latest mission requires planting an idea instead."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/Xxc2hXpG/download.jpg",
+    "Title": "Interstellar",
+    "Genre": ["Adventure", "Drama", "Sci-Fi"],
+    "Duration": 169,
+    "ReleaseYear": 2014,
+    "Rating": 8.6,
+    "Summary": "A team of explorers travels through a wormhole in space to find a new home for humanity as Earth faces extinction."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/FbQHRgT6/images.jpg",
+    "Title": "The Dark Knight",
+    "Genre": ["Action", "Crime", "Drama"],
+    "Duration": 152,
+    "ReleaseYear": 2008,
+    "Rating": 9.0,
+    "Summary": "Batman faces his greatest psychological and moral challenge when the Joker wreaks havoc on Gotham City."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/YBnd7vhr/download.jpg",
+    "Title": "Avatar",
+    "Genre": ["Action", "Adventure", "Fantasy"],
+    "Duration": 162,
+    "ReleaseYear": 2009,
+    "Rating": 7.8,
+    "Summary": "A paraplegic marine on an alien planet becomes torn between following orders and protecting the world he feels is home."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/nqn5Qf1S/download.jpg",
+    "Title": "Joker",
+    "Genre": ["Crime", "Drama", "Thriller"],
+    "Duration": 122,
+    "ReleaseYear": 2019,
+    "Rating": 8.4,
+    "Summary": "A failed comedian's descent into madness leads him to become the infamous criminal mastermind known as the Joker."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/p6QHz09c/images.jpg",
+    "Title": "Parasite",
+    "Genre": ["Comedy", "Drama", "Thriller"],
+    "Duration": 132,
+    "ReleaseYear": 2019,
+    "Rating": 8.6,
+    "Summary": "A poor family infiltrates the lives of a wealthy household, leading to unexpected and dark consequences."
+  },
+   {
+    "Poster": "https://i.ibb.co.com/s78rh3V/images.jpg",
+    "Title": "Titanic",
+    "Genre": ["Drama", "Romance"],
+    "Duration": 195,
+    "ReleaseYear": 1997,
+    "Rating": 7.9,
+    "Summary": "A young couple from different social classes fall in love aboard the ill-fated RMS Titanic."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/kgXw3HWt/download.jpg",
+    "Title": "Gladiator",
+    "Genre": ["Action", "Drama"],
+    "Duration": 155,
+    "ReleaseYear": 2000,
+    "Rating": 8.5,
+    "Summary": "A betrayed Roman general seeks revenge against the corrupt emperor who murdered his family and sent him into slavery."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/1GcnF8gH/download.jpg",
+    "Title": "Avengers: Endgame",
+    "Genre": ["Action", "Adventure", "Sci-Fi"],
+    "Duration": 181,
+    "ReleaseYear": 2019,
+    "Rating": 8.4,
+    "Summary": "The Avengers assemble once more in a final stand against Thanos to restore balance to the universe."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/wNFK9k79/images.jpg",
+    "Title": "Forrest Gump",
+    "Genre": ["Drama", "Romance"],
+    "Duration": 142,
+    "ReleaseYear": 1994,
+    "Rating": 8.8,
+    "Summary": "A kind-hearted man with a low IQ witnesses and influences some of the most defining moments of the 20th century."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/7txQk1P6/images.jpg",
+    "Title": "The Shawshank Redemption",
+    "Genre": ["Drama"],
+    "Duration": 142,
+    "ReleaseYear": 1994,
+    "Rating": 9.3,
+    "Summary": "A banker sentenced to life in Shawshank prison forms an unlikely friendship while quietly planning his escape."
+  },
+   {
+    "Poster": "https://i.ibb.co.com/0jSjYcD6/download.jpg",
+    "Title": "Spider-Man: No Way Home",
+    "Genre": ["Action", "Adventure", "Fantasy"],
+    "Duration": 148,
+    "ReleaseYear": 2021,
+    "Rating": 8.3,
+    "Summary": "Peter Parker's identity is revealed, forcing him to seek Doctor Strange's help, which opens the multiverse and brings old enemies back."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/9ktcc7Jf/download.jpg",
+    "Title": "Dune",
+    "Genre": ["Adventure", "Drama", "Sci-Fi"],
+    "Duration": 155,
+    "ReleaseYear": 2021,
+    "Rating": 8.0,
+    "Summary": "A gifted young man becomes the key to his family's survival and the future of his people as rival factions fight for control of a desert planet."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/LXjRGh0f/download.jpg",
+    "Title": "Oppenheimer",
+    "Genre": ["Biography", "Drama", "History"],
+    "Duration": 180,
+    "ReleaseYear": 2023,
+    "Rating": 8.8,
+    "Summary": "The story of physicist J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/fGTxvjLX/download.jpg",
+    "Title": "Barbie",
+    "Genre": ["Adventure", "Comedy", "Fantasy"],
+    "Duration": 114,
+    "ReleaseYear": 2023,
+    "Rating": 7.0,
+    "Summary": "Barbie and Ken embark on a journey of self-discovery after they are expelled from the perfect world of Barbie Land."
+  },
+  {
+    "Poster": "https://i.ibb.co.com/fs2Hghw/download.jpg",
+    "Title": "Fight Club",
+    "Genre": ["Drama", "Thriller"],
+    "Duration": 139,
+    "ReleaseYear": 1999,
+    "Rating": 8.8,
+    "Summary": "An office worker and a soap salesman form an underground fight club that evolves into something much darker."
+  }
+]
