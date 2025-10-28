@@ -6,6 +6,8 @@ const Navbar = () => {
         <li><Link to='/allMovies'>All Movies</Link></li>
         <li><Link to='/addMovie'>Add Movie</Link></li>
         <li><Link to='/myFavorites'>My Favorites</Link></li>
+        <li><Link to='/login'>Login</Link></li>
+        <li><Link to='/register'>Register</Link></li>
         {/* {
             user ?
                 <div>
