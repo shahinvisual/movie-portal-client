@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'
+import { PiTimerBold } from 'react-icons/pi';
+import { LuCalendarDays } from 'react-icons/lu';
+import { LiaTagsSolid } from 'react-icons/lia';
 
 const MovieCard = ({ movie }) => {
-      const [rating, setRating] = useState(3);
-    const { Title, Poster, Genre, Duration, ReleaseYear, Rating:movieRating, Summary } = movie;
+    const [rating, setRating] = useState(3);
+    const { Title, Poster, Genre, Duration, ReleaseYear, Rating: movieRating, Summary } = movie;
+    const hours = Math.floor(Duration / 60);
+    const minute = Duration % 60;
+
     return (
         <div>
             <div className="card bg-base-100 w-96 shadow-sm">
@@ -16,12 +22,10 @@ const MovieCard = ({ movie }) => {
                         alt="Poster" />
                 </figure>
                 <div className="card-body">
-                    <h2 className="card-title">
-                        {Title}
-                        <div className="badge badge-secondary">NEW</div>
-                    </h2>
-                    <p>{Summary}</p>
-                    <div className="card-actions justify-end">
+                    <div className="card-actions justify-between">
+                        <h2 className="card-title">
+                            {Title}
+                        </h2>
                         <div className="badge badge-outline">
                             {movieRating}
                             <Rating
@@ -30,8 +34,16 @@ const MovieCard = ({ movie }) => {
                                 onChange={setRating}
                             />
                         </div>
-                        <div className="badge badge-outline">{Duration}</div>
                     </div>
+                    <p>{Summary}</p>
+                    <div className="badge badge-outline"><PiTimerBold />Duration  {`${hours} : ${minute}`}</div>
+                    <div className="badge badge-outline"><LuCalendarDays /> Publish : {ReleaseYear}</div>
+                    <div className='flex gap-2 mt-3'>
+                        {
+                            Genre.map((tag, index) => <div className='badge shadow flex items-center justify-center' key={index}><LiaTagsSolid />{tag}</div>)
+                        }
+                    </div>
+                    <button className='btn btn-outline mt-5'>See Details</button>
                 </div>
             </div>
         </div>
