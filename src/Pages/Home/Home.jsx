@@ -1,9 +1,10 @@
 import FeaturedMovies from "../../components/FeaturedMovies/FeaturedMovies";
+import SwiperBanner from "../../components/swiper/SwiperBanner";
 
 const Home = () => {
     return (
         <div>
-            <h1>Home.......</h1>
+            <SwiperBanner />
             <FeaturedMovies />
         </div>
     );
