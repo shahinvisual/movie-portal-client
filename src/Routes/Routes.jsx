@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import AllMovies from "../Pages/AllMovies/AllMovies";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AddMovie from "../Pages/AddMovie/AddMovie";
 
 export const router = createBrowserRouter([
     {
@@ -21,11 +22,15 @@ export const router = createBrowserRouter([
         element: <AllMovies />
     },
     {
-        path:'login',
-        element: <Login/>
+        path: 'addMovie',
+        element: <AddMovie />
     },
     {
-        path:'register',
-        element: <Register/>
+        path: 'login',
+        element: <Login />
+    },
+    {
+        path: 'register',
+        element: <Register />
     }
 ])
