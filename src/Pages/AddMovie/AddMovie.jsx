@@ -2,19 +2,54 @@ import { Helmet } from "react-helmet-async";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { useState } from "react";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 
 const AddMovie = () => {
     const [rating, setRating] = useState(3);
+    const {user} = useAuth();
     const handleAddMovie = (e) => {
         e.preventDefault();
         const form = e.target;
         const movieName = form.movieName.value;
         const photo_url = form.photo_url.value;
         const genre = form.genre.value;
-        const year = form.year.value;
-        const duration = form.duration.value;
+        const year = parseInt(form.year.value);
+        const duration = parseInt(form.duration.value);
         const summary = form.summary.value;
-        console.log({ movieName, photo_url, genre, year, duration, summary, rating });
+        const AddMovie = {
+            email: user.email,
+            Title: movieName,
+            Poster: photo_url,
+            Genre: [genre],
+            ReleaseYear: year,
+            Duration: duration,
+            Summary: summary,
+            Rating: rating
+        };
+        console.log(AddMovie);
+        // new Movie Data added database------------
+        fetch('http://localhost:5000/addMovie', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(AddMovie)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Movie added successful!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(error => console.log("Error", error))
     }
     return (
         <div>
@@ -58,8 +93,9 @@ const AddMovie = () => {
                                 <label className="label">Summary </label>
                                 <textarea className="textarea" name="summary" placeholder="summary "></textarea>
                                 {/* Movie Rating-------------------- */}
+                                <label className="label">Rating </label>
                                 <Rating
-                                    style={{ maxWidth: 180 }}
+                                    style={{ maxWidth: 120 }}
                                     value={rating}
                                     onChange={setRating}
                                 />
