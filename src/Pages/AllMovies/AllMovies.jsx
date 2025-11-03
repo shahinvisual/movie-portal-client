@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../../components/MovieCard/MovieCard";
+import useAxios from "../../Hooks/useAxios";
 
 const AllMovies = () => {
+    const AxiosUser = useAxios();
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/movieInfo')
-            .then(result => result.json())
-            .then(data => {
-                console.log(data);
-                setMovies(data);
+        AxiosUser.get('/movieInfo')
+            .then(res => {
+                console.log(res.data);
+                setMovies(res.data);
                 setLoading(false)
             })
-    }, [])
+            .catch(error => console.log(error))
+
+    }, [AxiosUser])
     if (loading) {
         return <span className="loading loading-dots loading-xl"></span>
     }
