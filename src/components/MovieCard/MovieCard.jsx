@@ -5,8 +5,9 @@ import '@smastrom/react-rating/style.css'
 import { PiTimerBold } from 'react-icons/pi';
 import { LuCalendarDays } from 'react-icons/lu';
 import { LiaTagsSolid } from 'react-icons/lia';
+import { Link } from 'react-router-dom';
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, btn }) => {
     const [rating, setRating] = useState(3);
     const { Title, Poster, Genre, Duration, ReleaseYear, Rating: movieRating, Summary } = movie;
     const hours = Math.floor(Duration / 60);
@@ -43,7 +44,12 @@ const MovieCard = ({ movie }) => {
                             Genre.map((tag, index) => <div className='badge shadow flex items-center justify-center' key={index}><LiaTagsSolid />{tag}</div>)
                         }
                     </div>
-                    <button className='btn btn-outline mt-5'>See Details</button>
+                    {/* <Link to='/movieDetails'>
+                        <button className='btn btn-outline mt-5'>See Details</button>
+                    </Link> */}
+                    <div className='mt-5 flex items-center justify-between'>
+                        {btn}
+                    </div>
                 </div>
             </div>
         </div>
