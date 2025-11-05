@@ -7,7 +7,7 @@ import { LuCalendarDays } from 'react-icons/lu';
 import { LiaTagsSolid } from 'react-icons/lia';
 import { Link } from 'react-router-dom';
 
-const MovieCard = ({ movie, btn }) => {
+const MovieCard = ({ movie, btn, allMovBtn }) => {
     const [rating, setRating] = useState(3);
     const { Title, Poster, Genre, Duration, ReleaseYear, Rating: movieRating, Summary } = movie;
     const hours = Math.floor(Duration / 60);
@@ -44,9 +44,8 @@ const MovieCard = ({ movie, btn }) => {
                             Genre.map((tag, index) => <div className='badge shadow flex items-center justify-center' key={index}><LiaTagsSolid />{tag}</div>)
                         }
                     </div>
-                    {/* <Link to='/movieDetails'>
-                        <button className='btn btn-outline mt-5'>See Details</button>
-                    </Link> */}
+                    { allMovBtn
+                    }
                     <div className='mt-5 flex items-center justify-between'>
                         {btn}
                     </div>
