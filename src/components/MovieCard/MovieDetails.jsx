@@ -8,6 +8,8 @@ import { Rating } from "@smastrom/react-rating";
 import { PiTimerBold } from "react-icons/pi";
 import { LuCalendarDays } from "react-icons/lu";
 import { LiaTagsSolid } from "react-icons/lia";
+import { FaRegEdit } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const MovieDetails = () => {
     const [rating, setRating] = useState(3);
@@ -32,7 +34,7 @@ const MovieDetails = () => {
     const handleAddFavorite = () => {
         const addFavoriteMovie = {
             _id: _id,
-            Title, Poster, Genre, Duration, ReleaseYear, Rating, Summary
+            Title, Poster, Genre, Duration, ReleaseYear, Rating:movieRating, Summary
         };
         AxiosMovie.post('/userFavorite', addFavoriteMovie)
             .then(res => {
@@ -57,6 +59,7 @@ const MovieDetails = () => {
         //     /> */}
         // </div>
         <div className="max-w-7xl mx-auto flex items-center justify-center mt-16">
+            <Helmet><title>Camping Retreats || Movie Details</title></Helmet>
             <div className=" lg:flex  bg-base-100  shadow-sm">
 
                 <figure>
@@ -96,6 +99,7 @@ const MovieDetails = () => {
                     <div className='mt-5 flex items-center'>
                         <div className="card-actions justify-end">
                             <button onClick={handleAddFavorite} className="btn btn-ghost shadow"><GrFavorite color="red" /> Add to Favorite</button>
+                            <Link to='/updateMovie'><button onClick={handleAddFavorite} className="btn btn-ghost shadow"><FaRegEdit size={20}  color="#427aa1" />Update Movie</button></Link>
                             <button className="btn btn-ghost shadow"><MdDeleteForever size={22} color="#e54b4b" /> Delete Movie</button>
                         </div>
                     </div>

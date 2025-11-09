@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import AddMovie from "../Pages/AddMovie/AddMovie";
 import MovieDetails from "../components/MovieCard/MovieDetails";
 import FavoriteMovieList from "../Pages/FavoriteMovieList/FavoriteMovieList";
+import UpdateMovie from "../Pages/UpdateMovie/UpdateMovie";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
     {
         path: 'myFavorites',
         element: <FavoriteMovieList />
+    },
+    {
+        path: 'updateMovie',
+        element: <UpdateMovie />
     },
     {
         path: 'login',
