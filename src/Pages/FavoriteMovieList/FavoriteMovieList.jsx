@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import useAxios from "../../Hooks/useAxios";
 import FavoriteMovieCard from "./FavoriteMovieCard";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../Hooks/useAuth";
 
 const FavoriteMovieList = () => {
     const [favoriteMovie, setFavoriteMovie] = useState([]);
     const AxiosMovieList = useAxios();
+    const { user } = useAuth();
     useEffect(() => {
-        AxiosMovieList.get('/favoriteMovieList')
+        AxiosMovieList.get(`/favoriteMovieList?email=${user?.email}`)
             .then(res => {
                 console.log(res.data);
                 setFavoriteMovie(res.data)
@@ -15,7 +17,7 @@ const FavoriteMovieList = () => {
             }).catch(error => {
                 console.log(error);
             })
-    }, [AxiosMovieList])
+    }, [AxiosMovieList, user?.email])
     const handleRemove = (id) => {
         const filterMovie = favoriteMovie.filter(movie => movie._id != id);
         setFavoriteMovie(filterMovie)

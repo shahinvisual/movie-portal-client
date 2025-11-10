@@ -1,52 +1,67 @@
 import { Rating } from "@smastrom/react-rating";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useAxios from "../../Hooks/useAxios";
+import { useLoaderData } from "react-router-dom";
 
 const UpdateMovie = () => {
+    const [allMovieData, setAllMovieData] = useState();
+    const {id} = useLoaderData();
+    console.log(id);
+    console.log(allMovieData);
     const [rating, setRating] = useState(3);
-     const handleUpdateMovie = (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const movieName = form.movieName.value;
-            const photo_url = form.photo_url.value;
-            const genre = form.genre.value;
-            const year = parseInt(form.year.value);
-            const duration = parseInt(form.duration.value);
-            const summary = form.summary.value;
-            const AddMovie = {
-                email: user.email,
-                Title: movieName,
-                Poster: photo_url,
-                Genre: [genre],
-                ReleaseYear: year,
-                Duration: duration,
-                Summary: summary,
-                Rating: rating
-            };
-            console.log(AddMovie);
-            // new Movie Data added database------------
-            fetch('http://localhost:5000/addMovie', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(AddMovie)
+    const AllMovieData = useAxios();
+    useEffect(() => {
+        AllMovieData.get('/movieInfo')
+            .then(res => {
+                setAllMovieData(res.data)
+            }).catch(error => {
+                console.log(error);
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.insertedId) {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Movie added successful!",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                })
-                .catch(error => console.log("Error", error))
-        }
+    }, [AllMovieData])
+    const handleUpdateMovie = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const movieName = form.movieName.value;
+        const photo_url = form.photo_url.value;
+        const genre = form.genre.value;
+        const year = parseInt(form.year.value);
+        const duration = parseInt(form.duration.value);
+        const summary = form.summary.value;
+        const AddMovie = {
+            email: user.email,
+            Title: movieName,
+            Poster: photo_url,
+            Genre: [genre],
+            ReleaseYear: year,
+            Duration: duration,
+            Summary: summary,
+            Rating: rating
+        };
+        console.log(AddMovie);
+        // new Movie Data added database------------
+        fetch('http://localhost:5000/addMovie', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(AddMovie)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Movie added successful!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+            .catch(error => console.log("Error", error))
+    }
     return (
         <div>
             <Helmet><title>Camping Retreats || Update Movie</title></Helmet>
@@ -95,7 +110,7 @@ const UpdateMovie = () => {
                                     value={rating}
                                     onChange={setRating}
                                 />
-                                <input type="submit" value="Submit Movie" className="btn btn-neutral mt-4"/>
+                                <input type="submit" value="Submit Movie" className="btn btn-neutral mt-4" />
 
                             </form>
                             <p className='text-xl font-semibold text-error'>{ }</p>

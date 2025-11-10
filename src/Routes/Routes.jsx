@@ -38,8 +38,9 @@ export const router = createBrowserRouter([
         element: <FavoriteMovieList />
     },
     {
-        path: 'updateMovie',
-        element: <UpdateMovie />
+        path: 'updateMovie/:id',
+        element: <UpdateMovie />,
+        loader: ({ params }) => fetch(`http://localhost:5000/updateMovie/${params.id}`)
     },
     {
         path: 'login',
