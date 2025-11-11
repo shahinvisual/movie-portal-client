@@ -13,12 +13,10 @@ const FavoriteMovieCard = ({ movie, favoriteMovie, setFavoriteMovie }) => {
     const [rating, setRating] = useState(3);
     const AxiosDelete = useAxios();
     const { _id, Title, Poster, Genre, Duration, ReleaseYear, Rating: movieRating, Summary } = movie;
-    console.log(movie);
     const hours = Math.floor(Duration / 60);
     const minute = Duration % 60;
     // Delete Operation--------------------
     const handleDelete = (id) => {
-        console.log(id);
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -28,11 +26,9 @@ const FavoriteMovieCard = ({ movie, favoriteMovie, setFavoriteMovie }) => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            console.log(result);
             if (result.isConfirmed) {
                 AxiosDelete.delete(`/favoriteMovieDelete/${id}`)
                     .then(res => {
-                        console.log(res);
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
@@ -44,7 +40,14 @@ const FavoriteMovieCard = ({ movie, favoriteMovie, setFavoriteMovie }) => {
                         }
 
                     }).catch(error => {
-                        console.log(error);
+                        if (error) {
+                            Swal.fire({
+                                icon: "error",
+                                title: `Oops...${error}`,
+                                text: "Something went wrong!",
+                                footer: '<a href="#">Why do I have this issue?</a>'
+                            });
+                        }
                     })
             }
         });

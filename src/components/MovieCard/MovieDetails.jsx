@@ -1,7 +1,7 @@
 import { GrFavorite } from "react-icons/gr";
 import { MdDeleteForever } from "react-icons/md";
 import MovieCard from "./MovieCard";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAxios from "../../Hooks/useAxios";
 import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
@@ -11,6 +11,7 @@ import { LiaTagsSolid } from "react-icons/lia";
 import { FaRegEdit } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const MovieDetails = () => {
     const [rating, setRating] = useState(3);
@@ -19,7 +20,7 @@ const MovieDetails = () => {
     const AxiosId = useAxios();
     const { user } = useAuth();
     const { _id } = useLoaderData();
-    console.log(_id);
+    const navigate = useNavigate();
     useEffect(() => {
         AxiosId.get(`/movieDetails/${_id}`)
             .then(res => setMovieDetails(res.data))
@@ -41,26 +42,28 @@ const MovieDetails = () => {
         };
         AxiosMovie.post('/userFavorite', addFavoriteMovie)
             .then(res => {
-                console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${Title} Movie Added your Favorite List`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate('/myFavorites')
+                }
             }).catch(error => {
-                console.log(error);
+                if (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: `Oops...${error}`,
+                        text: "Something went wrong!",
+                        footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+                }
             })
     }
     return (
-        // <div >
-        //     {/* <MovieCard 
-        //         allMovBtn={
-        //             <Link to='/allMovies' className='flex items-center justify-center'>
-        //                 <button className='btn btn-wide btn-outline mt-5'> All Movies</button>
-        //             </Link>
-        //         }
-        //         btn={<div className="card-actions justify-end">
-        //             <button onClick={handleAddFavorite} className="btn btn-ghost shadow"><GrFavorite color="red" /> Add to Favorite</button>
-        //             <button className="btn btn-ghost shadow"><MdDeleteForever size={22} color="#e54b4b" /> Delete Movie</button>
-        //         </div>}
-        //         movie={movieDetails}
-        //     /> */}
-        // </div>
         <div className="max-w-7xl mx-auto flex items-center justify-center mt-16">
             <Helmet><title>Camping Retreats || Movie Details</title></Helmet>
             <div className=" lg:flex  bg-base-100  shadow-sm">
@@ -102,7 +105,7 @@ const MovieDetails = () => {
                     <div className='mt-5 flex items-center'>
                         <div className="card-actions justify-end">
                             <button onClick={handleAddFavorite} className="btn btn-ghost shadow"><GrFavorite color="red" /> Add to Favorite</button>
-                            <Link to={`/updateMovie/${id}`}><button onClick={handleAddFavorite} className="btn btn-ghost shadow"><FaRegEdit size={20} color="#427aa1" />Update Movie</button></Link>
+                            <Link to={`/updateMovie/${id}`}><button className="btn btn-ghost shadow"><FaRegEdit size={20} color="#427aa1" />Update Movie</button></Link>
                             <button className="btn btn-ghost shadow"><MdDeleteForever size={22} color="#e54b4b" /> Delete Movie</button>
                         </div>
                     </div>

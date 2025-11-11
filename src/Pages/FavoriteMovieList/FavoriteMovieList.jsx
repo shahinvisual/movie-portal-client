@@ -3,6 +3,7 @@ import useAxios from "../../Hooks/useAxios";
 import FavoriteMovieCard from "./FavoriteMovieCard";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const FavoriteMovieList = () => {
     const [favoriteMovie, setFavoriteMovie] = useState([]);
@@ -11,10 +12,16 @@ const FavoriteMovieList = () => {
     useEffect(() => {
         AxiosMovieList.get(`/favoriteMovieList?email=${user?.email}`)
             .then(res => {
-                console.log(res.data);
                 setFavoriteMovie(res.data)
             }).catch(error => {
-                console.log(error);
+                if (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: `Oops...${error}`,
+                        text: "Something went wrong!",
+                        footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+                }
             })
     }, [AxiosMovieList, user?.email])
     // const handleRemove = (id) => {

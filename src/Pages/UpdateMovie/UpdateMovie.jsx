@@ -8,11 +8,9 @@ import Swal from "sweetalert2";
 const UpdateMovie = () => {
     const navigate = useNavigate();
     const MovieId = useLoaderData();
-    console.log(MovieId._id);
     const [rating, setRating] = useState(3);
     const AllMovieData = useAxios();
-    const {_id, Title, Poster, Genre, Duration, ReleaseYear,  Summary } = MovieId;
-    console.log(MovieId);
+    const { _id, Title, Poster, Genre, Duration, ReleaseYear, Summary } = MovieId;
     const handleUpdateMovie = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -32,7 +30,7 @@ const UpdateMovie = () => {
             Rating: rating
         };
         // Update Movie Data added database------------
-        AllMovieData.put(`/movieUpdate/${_id}`, UpdateMovie )
+        AllMovieData.put(`/movieUpdate/${_id}`, UpdateMovie)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
@@ -45,7 +43,16 @@ const UpdateMovie = () => {
                     navigate('/allMovies')
                 }
             })
-            .catch(error => console.log("Error", error))
+            .catch(error => {
+                if (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: `Oops...${error}`,
+                        text: "Something went wrong!",
+                        footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+                }
+            })
     }
     return (
         <div>

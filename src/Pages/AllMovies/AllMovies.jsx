@@ -4,6 +4,8 @@ import useAxios from "../../Hooks/useAxios";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 
 const AllMovies = () => {
     const AxiosUser = useAxios();
@@ -25,7 +27,8 @@ const AllMovies = () => {
     return (
         <div className="max-w-7xl mx-auto">
             <Helmet><title>Camping Retreats || All Movie</title></Helmet>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Navbar></Navbar>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
                 {
                     movies.map((movie, index) => <MovieCard
                         btn={<Link to={`/movieDetails/${movie._id}`}>
@@ -37,6 +40,7 @@ const AllMovies = () => {
                         movie={movie} />)
                 }
             </div>
+            <Footer/>
         </div>
     );
 };

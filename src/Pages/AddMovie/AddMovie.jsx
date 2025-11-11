@@ -4,10 +4,12 @@ import '@smastrom/react-rating/style.css'
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const AddMovie = () => {
     const [rating, setRating] = useState(3);
-    const {user} = useAuth();
+    const { user } = useAuth();
+    const navigate = useNavigate();
     const handleAddMovie = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -27,7 +29,6 @@ const AddMovie = () => {
             Summary: summary,
             Rating: rating
         };
-        console.log(AddMovie);
         // new Movie Data added database------------
         fetch('http://localhost:5000/addMovie', {
             method: "POST",
@@ -38,7 +39,6 @@ const AddMovie = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.insertedId) {
                     Swal.fire({
                         position: "top-end",
@@ -47,9 +47,19 @@ const AddMovie = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    navigate('/allMovies')
                 }
             })
-            .catch(error => console.log("Error", error))
+            .catch(error => {
+                if (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: `Oops...${error}`,
+                        text: "Something went wrong!",
+                        footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+                }
+            })
     }
     return (
         <div>
