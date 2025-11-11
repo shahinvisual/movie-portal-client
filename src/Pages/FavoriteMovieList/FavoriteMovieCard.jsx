@@ -6,8 +6,9 @@ import { MdDeleteForever } from 'react-icons/md';
 import { PiTimerBold } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 import useAxios from '../../Hooks/useAxios';
+import Swal from 'sweetalert2';
 
-const FavoriteMovieCard = ({ movie, onDeleteSuccess }) => {
+const FavoriteMovieCard = ({ movie, favoriteMovie, setFavoriteMovie }) => {
     // const [latestMovie, setLatestMovie] = useState(movie);
     const [rating, setRating] = useState(3);
     const AxiosDelete = useAxios();
@@ -17,14 +18,36 @@ const FavoriteMovieCard = ({ movie, onDeleteSuccess }) => {
     const minute = Duration % 60;
     // Delete Operation--------------------
     const handleDelete = (id) => {
-        console.log('delete movie', id);
-        AxiosDelete.delete(`/favoriteMovieDelete/${id}`)
-            .then(res => {
-                console.log(res);
-                onDeleteSuccess(id);
-            }).catch(error => {
-                console.log(error);
-            })
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            console.log(result);
+            if (result.isConfirmed) {
+                AxiosDelete.delete(`/favoriteMovieDelete/${id}`)
+                    .then(res => {
+                        console.log(res);
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `${Title} has been deleted.`,
+                                icon: "success"
+                            });
+                            const filterMovie = favoriteMovie.filter(movie => movie._id !== id);
+                            setFavoriteMovie(filterMovie);
+                        }
+
+                    }).catch(error => {
+                        console.log(error);
+                    })
+            }
+        });
 
     }
     return (

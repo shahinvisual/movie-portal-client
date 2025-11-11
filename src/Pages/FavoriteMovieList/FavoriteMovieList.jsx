@@ -13,15 +13,14 @@ const FavoriteMovieList = () => {
             .then(res => {
                 console.log(res.data);
                 setFavoriteMovie(res.data)
-
             }).catch(error => {
                 console.log(error);
             })
     }, [AxiosMovieList, user?.email])
-    const handleRemove = (id) => {
-        const filterMovie = favoriteMovie.filter(movie => movie._id != id);
-        setFavoriteMovie(filterMovie)
-    }
+    // const handleRemove = (id) => {
+    //     const filterMovie = favoriteMovie.filter(movie => movie._id != id);
+    //     setFavoriteMovie(filterMovie)
+    // }
     if (!favoriteMovie) return <span className="loading loading-ring loading-xl"></span>
     return (
         <>
@@ -30,7 +29,8 @@ const FavoriteMovieList = () => {
                 {
                     favoriteMovie.map((movie, index) => <FavoriteMovieCard
                         key={index}
-                        onDeleteSuccess={handleRemove}
+                        favoriteMovie={favoriteMovie}
+                        setFavoriteMovie={setFavoriteMovie}
                         movie={movie}
                     />)
                 }
