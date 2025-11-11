@@ -1,24 +1,18 @@
 import { Rating } from "@smastrom/react-rating";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAxios from "../../Hooks/useAxios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateMovie = () => {
-    const [allMovieData, setAllMovieData] = useState();
-    const {id} = useLoaderData();
-    console.log(id);
-    console.log(allMovieData);
+    const navigate = useNavigate();
+    const MovieId = useLoaderData();
+    console.log(MovieId._id);
     const [rating, setRating] = useState(3);
     const AllMovieData = useAxios();
-    useEffect(() => {
-        AllMovieData.get('/movieInfo')
-            .then(res => {
-                setAllMovieData(res.data)
-            }).catch(error => {
-                console.log(error);
-            })
-    }, [AllMovieData])
+    const {_id, Title, Poster, Genre, Duration, ReleaseYear,  Summary } = MovieId;
+    console.log(MovieId);
     const handleUpdateMovie = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -28,8 +22,7 @@ const UpdateMovie = () => {
         const year = parseInt(form.year.value);
         const duration = parseInt(form.duration.value);
         const summary = form.summary.value;
-        const AddMovie = {
-            email: user.email,
+        const UpdateMovie = {
             Title: movieName,
             Poster: photo_url,
             Genre: [genre],
@@ -38,26 +31,18 @@ const UpdateMovie = () => {
             Summary: summary,
             Rating: rating
         };
-        console.log(AddMovie);
-        // new Movie Data added database------------
-        fetch('http://localhost:5000/addMovie', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(AddMovie)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.insertedId) {
+        // Update Movie Data added database------------
+        AllMovieData.put(`/movieUpdate/${_id}`, UpdateMovie )
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Movie added successful!",
+                        title: "Movie Update successful!",
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    navigate('/allMovies')
                 }
             })
             .catch(error => console.log("Error", error))
@@ -78,19 +63,19 @@ const UpdateMovie = () => {
                             <form onSubmit={handleUpdateMovie} className="fieldset">
                                 {/* Movie Title Field------------------ */}
                                 <label className="label">Movie Title</label>
-                                <input type="text" name='movieName' className="input" placeholder="movie title" required />
+                                <input defaultValue={Title} type="text" name='movieName' className="input" placeholder="movie title" required />
                                 {/* Movie Poster-URL------------------ */}
                                 <label className="label">Movie Poster URL</label>
-                                <input type="url" name='photo_url' className="input" placeholder="poster-url" required />
+                                <input defaultValue={Poster} type="url" name='photo_url' className="input" placeholder="poster-url" required />
                                 {/* Genre Movie Category----------------- */}
-                                <select name="genre" defaultValue="Movie Category" className="select">
+                                <select name="genre" defaultValue={Genre?.[0] || ""} className="select">
                                     <option disabled={true}>Pick a color</option>
                                     <option>comedy</option>
                                     <option>drama</option>
                                     <option>horror</option>
                                 </select>
                                 {/* Release Year Movie----------------- */}
-                                <select name="year" defaultValue="Release Year" className="select">
+                                <select name="year" defaultValue={ReleaseYear || ""} className="select">
                                     <option disabled={true}>Pick a color</option>
                                     <option>2021</option>
                                     <option>2022</option>
@@ -99,10 +84,10 @@ const UpdateMovie = () => {
                                 </select>
                                 {/* Movie Duration------------------ */}
                                 <label className="label">Duration</label>
-                                <input type="number" name='duration' className="input" placeholder="duration" required />
+                                <input defaultValue={Duration} type="number" name='duration' className="input" placeholder="duration" required />
                                 {/* Movie Summary------------------ */}
                                 <label className="label">Summary </label>
-                                <textarea className="textarea" name="summary" placeholder="summary "></textarea>
+                                <textarea defaultValue={Summary} className="textarea" name="summary" placeholder="summary "></textarea>
                                 {/* Movie Rating-------------------- */}
                                 <label className="label">Rating </label>
                                 <Rating
@@ -110,7 +95,7 @@ const UpdateMovie = () => {
                                     value={rating}
                                     onChange={setRating}
                                 />
-                                <input type="submit" value="Submit Movie" className="btn btn-neutral mt-4" />
+                                <input type="submit" value="Update Movie" className="btn btn-neutral mt-4" />
 
                             </form>
                             <p className='text-xl font-semibold text-error'>{ }</p>

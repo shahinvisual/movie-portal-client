@@ -35,7 +35,7 @@ const MovieDetails = () => {
     // Handle Add Favorite -----------------
     const handleAddFavorite = () => {
         const addFavoriteMovie = {
-            _id: _id,
+            MovieId: _id,
             userEmail: user?.email,
             Title, Poster, Genre, Duration, ReleaseYear, Rating: movieRating, Summary
         };

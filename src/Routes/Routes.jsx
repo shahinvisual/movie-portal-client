@@ -8,6 +8,7 @@ import AddMovie from "../Pages/AddMovie/AddMovie";
 import MovieDetails from "../components/MovieCard/MovieDetails";
 import FavoriteMovieList from "../Pages/FavoriteMovieList/FavoriteMovieList";
 import UpdateMovie from "../Pages/UpdateMovie/UpdateMovie";
+import PrivateRoute from "../Private/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -31,16 +32,16 @@ export const router = createBrowserRouter([
     },
     {
         path: 'addMovie',
-        element: <AddMovie />
+        element: <PrivateRoute><AddMovie /></PrivateRoute>
     },
     {
         path: 'myFavorites',
-        element: <FavoriteMovieList />
+        element: <PrivateRoute><FavoriteMovieList /></PrivateRoute>
     },
     {
         path: 'updateMovie/:id',
         element: <UpdateMovie />,
-        loader: ({ params }) => fetch(`http://localhost:5000/updateMovie/${params.id}`)
+        loader: async ({ params }) => await fetch(`http://localhost:5000/updateMovie/${params.id}`)
     },
     {
         path: 'login',
