@@ -42,7 +42,7 @@ const AllMovies = () => {
                 <input
                     type="text"
                     placeholder="Search"
-                    className="input w-full input-ghost"
+                    className="input w-full input-border"
                     value={searchData}
                     onChange={(e) => setSearchData(e.target.value)} />
             </div>

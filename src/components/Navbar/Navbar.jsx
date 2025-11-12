@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
@@ -20,6 +21,7 @@ const Navbar = () => {
                 :
                 <li><Link to='/login'>Login</Link></li>
         }
+        <li><ThemeToggle /></li>
     </>
     return (
         <div>
