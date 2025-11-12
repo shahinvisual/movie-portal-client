@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
     {
         path: 'movieDetails/:id',
         element: <MovieDetails />,
-        loader: async ({ params }) => await fetch(`http://localhost:5000/movieDetails/${params.id}`)
+        loader: async ({ params }) => await fetch(`https://movie-portal-server-iota-nine.vercel.app/movieDetails/${params.id}`)
     },
     {
         path: 'addMovie',
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
     {
         path: 'updateMovie/:id',
         element: <UpdateMovie />,
-        loader: async ({ params }) => await fetch(`http://localhost:5000/updateMovie/${params.id}`)
+        loader: async ({ params }) => await fetch(`https://movie-portal-server-iota-nine.vercel.app/updateMovie/${params.id}`)
     },
     {
         path: 'login',

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosUser = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://movie-portal-server-iota-nine.vercel.app'
 })
 const useAxios = () => {
     return AxiosUser;

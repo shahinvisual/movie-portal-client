@@ -30,7 +30,7 @@ const AddMovie = () => {
             Rating: rating
         };
         // new Movie Data added database------------
-        fetch('http://localhost:5000/addMovie', {
+        fetch('https://movie-portal-server-iota-nine.vercel.app/addMovie', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
